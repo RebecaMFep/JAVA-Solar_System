@@ -113,32 +113,33 @@ public String getAttributes() {
             "Observable: " + observable; 
     }
 
-     // Method to calculate the density of the planet
-
-     public double calculateDensity() {
+    public double calculateDensity() {
         if (volume != 0) {
             return mass / volume;
         } else {
-            // Handle the case when volume is zero to avoid division by zero
             return 0.0;
         }
     }
 
-    // Method to determine if the planet is considered exterior
-    
-    public boolean isExterior() {
-        // Average distance to the Sun in millions of kilometers
-        int distanceToSunInMillions = distanceToSun;
+    public boolean isBeyondAsteroidBelt() {
+        // Distancia al Sol en UA
+        double distanceToSunInUA = distanceToSun / 149597870.0;
 
-        // Check if the planet is beyond the asteroid belt
-        return distanceToSunInMillions > 2.1 && distanceToSunInMillions < 3.4;
+        // Verificar si el planeta está más allá del cinturón de asteroides
+        return distanceToSunInUA > 2.1 && distanceToSunInUA < 3.4;
     }
 
+    public boolean isExterior() {
+        double distanceToSunInMillions = distanceToSun * 149.597870;
+
+        return distanceToSunInMillions < 210  || distanceToSunInMillions < 340;
+    }
+    
+    
+
     public boolean isItExterior() {
-        // Average distance to the Sun in kilometers
         double distanceToSunInKm = distanceToSun * 149597870;
 
-        // Check if the planet is beyond the asteroid belt (2.1 to 3.4 AU)
         return distanceToSunInKm > 2.1 * 149597870 && distanceToSunInKm < 3.4 * 149597870;
     }
 
